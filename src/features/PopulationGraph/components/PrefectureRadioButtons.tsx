@@ -6,10 +6,10 @@ function PrefectureRadioButtons(): JSX.Element {
 
   return (
     <div>
-      {demoPrefectureData.map((option) => (
+      {demoPrefectureData.map((prefectureName) => (
         <RadioButton
-          key={option}
-          option={option}
+          key={prefectureName}
+          option={prefectureName}
           selectedOption='tokyo'
           onChange={demoFunc}
         />

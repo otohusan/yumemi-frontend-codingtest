@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
+// URLとapiKeyを引数にデータとローディング中であることを返す
 function useGetData(url: string, apiKey: string): any {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);

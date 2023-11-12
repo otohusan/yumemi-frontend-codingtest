@@ -1,4 +1,3 @@
-import { type Key } from 'react';
 import PrefectureRadioButtons from '../features/PopulationGraph/components/PrefectureRadioButtons';
 import useGetData from '../hooks/useGetData';
 
@@ -12,14 +11,7 @@ function PopulationGraph(): JSX.Element {
 
   return (
     <div>
-      <PrefectureRadioButtons />
-      <ul>
-        {prefectureData.map(
-          (prefecture: { prefCode: Key; prefName: string }) => (
-            <li key={prefecture.prefCode}>{prefecture.prefName}</li>
-          )
-        )}
-      </ul>
+      <PrefectureRadioButtons prefectureData={prefectureData} />
     </div>
   );
 }

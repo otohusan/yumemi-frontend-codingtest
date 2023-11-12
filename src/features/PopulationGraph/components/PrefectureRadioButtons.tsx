@@ -1,16 +1,26 @@
 import { RadioButton } from '../../../components';
 
-function PrefectureRadioButtons(): JSX.Element {
-  const demoPrefectureData: string[] = ['tokyo', 'osaka', 'kyoto'];
+interface Prefecture {
+  prefCode: number;
+  prefName: string;
+}
+
+interface PrefectureRadioButtonsProps {
+  prefectureData: Prefecture[];
+}
+
+function PrefectureRadioButtons({
+  prefectureData,
+}: PrefectureRadioButtonsProps): JSX.Element {
   const demoFunc = (): void => {};
 
   return (
     <div>
-      {demoPrefectureData.map((prefectureName) => (
+      {prefectureData.map((prefecture: Prefecture) => (
         <RadioButton
-          key={prefectureName}
-          option={prefectureName}
-          selectedOption='tokyo'
+          key={prefecture.prefCode}
+          option={prefecture.prefName}
+          selectedOption='東京都'
           onChange={demoFunc}
         />
       ))}

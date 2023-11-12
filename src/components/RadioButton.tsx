@@ -17,6 +17,7 @@ function RadioButton({
           value={option}
           checked={selectedOption === option}
           onChange={onChange}
+          name={option}
         />
         {option}
       </label>

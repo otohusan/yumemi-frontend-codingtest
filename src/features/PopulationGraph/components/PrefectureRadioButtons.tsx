@@ -1,6 +1,4 @@
 import { RadioButton } from '../../../components';
-import { useState } from 'react';
-import handleRadioButtonChange from '../api/handleRadioButtonChange';
 
 interface Prefecture {
   prefCode: number;
@@ -9,13 +7,15 @@ interface Prefecture {
 
 interface PrefectureRadioButtonsProps {
   prefectureData: Prefecture[];
+  selectedOption: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function PrefectureRadioButtons({
   prefectureData,
+  selectedOption,
+  onChange,
 }: PrefectureRadioButtonsProps): JSX.Element {
-  const [selectedOption, setSelectedOption] = useState<string>('東京都');
-
   return (
     <div>
       {prefectureData.map((prefecture: Prefecture) => (
@@ -23,9 +23,7 @@ function PrefectureRadioButtons({
           key={prefecture.prefCode}
           option={prefecture.prefName}
           selectedOption={selectedOption}
-          onChange={(e) => {
-            handleRadioButtonChange(e, setSelectedOption);
-          }}
+          onChange={onChange}
         />
       ))}
     </div>

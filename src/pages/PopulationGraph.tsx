@@ -8,7 +8,7 @@ function PopulationGraph(): JSX.Element {
   const apiKey = import.meta.env.VITE_API_KEY;
 
   // カスタムフックを使って都道府県のデータを取得してきている
-  const [prefectureData, prefectureDataLoding] = useGetData(
+  const [prefectureData, prefectureDataLoading] = useGetData(
     'https://opendata.resas-portal.go.jp/api/v1/prefectures',
     apiKey
   );
@@ -18,15 +18,16 @@ function PopulationGraph(): JSX.Element {
     useState<string>('東京都');
 
   return (
-    <div>
+    <main>
       <PrefectureRadioButtons
         prefectureData={prefectureData}
         selectedOption={selectedPrefectureOption}
         onChange={(e) => {
           handleRadioButtonChange(e, setSelectedPrefectureOption);
         }}
+        prefectureDataLoading={prefectureDataLoading}
       />
-    </div>
+    </main>
   );
 }
 

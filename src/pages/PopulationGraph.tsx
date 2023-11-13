@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PrefectureRadioButtons from '../features/PopulationGraph/components/PrefectureRadioButtons';
+import PopulationGraphComponent from '../features/PopulationGraph/components/PopulationGraphComponent';
 import useGetData from '../hooks/useGetData';
 import { handleRadioButtonChange } from '../features/PopulationGraph/api';
 
@@ -27,6 +28,7 @@ function PopulationGraph(): JSX.Element {
         }}
         prefectureDataLoading={prefectureDataLoading}
       />
+      <PopulationGraphComponent />
     </main>
   );
 }

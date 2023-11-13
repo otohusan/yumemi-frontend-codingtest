@@ -31,4 +31,22 @@ describe('useGetDataの挙動確認', () => {
       expect(result.current[1]).toBe(false);
     });
   });
+
+  test('API通信失敗時には、エラーアラート発動', async () => {
+    // alert をモック化
+    global.alert = jest.fn();
+
+    // API通信を失敗
+    mockAxios.get.mockRejectedValue(new Error('API Error'));
+
+    // フックをレンダリング
+    const { result } = renderHook(() => useGetData('test-url', 'test-api-key'));
+
+    await waitFor(() => {
+      // エラーアラート が呼び出されたことを確認
+      expect(global.alert).toHaveBeenCalledWith('Error: API Errorが起きました');
+      // レスポンスは何も返ってこない
+      expect(result.current[0]).toEqual([]);
+    });
+  });
 });

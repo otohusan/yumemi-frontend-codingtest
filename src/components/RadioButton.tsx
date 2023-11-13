@@ -1,12 +1,15 @@
 interface RadioButtonProps {
   option: string;
   selectedOption: string;
+  // 何かデータを追加したい時に使える
+  dataSet: number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function RadioButton({
   option,
   selectedOption,
+  dataSet,
   onChange,
 }: RadioButtonProps): JSX.Element {
   return (
@@ -18,6 +21,7 @@ function RadioButton({
           checked={selectedOption === option}
           onChange={onChange}
           name={option}
+          data-prefcode={dataSet}
         />
         {option}
       </label>

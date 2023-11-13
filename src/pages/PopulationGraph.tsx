@@ -4,6 +4,11 @@ import PopulationGraphComponent from '../features/PopulationGraph/components/Pop
 import useGetData from '../hooks/useGetData';
 import { handleRadioButtonChange } from '../features/PopulationGraph/api';
 
+interface PrefectureOption {
+  prefCode: number;
+  prefName: string;
+}
+
 function PopulationGraph(): JSX.Element {
   // apiKeyを環境変数から取得
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -15,24 +20,29 @@ function PopulationGraph(): JSX.Element {
   );
 
   // ラジオボタンで選択されている都道府県を管理
-  const [selectedPrefectureOption, setSelectedPrefectureOption] =
-    useState<string>('東京都');
+  // 初期状態では、東京都（prefCode: 13）を設定
+  const [selectedPrefecture, setSelectedPrefecture] =
+    useState<PrefectureOption>({
+      prefCode: 13,
+      prefName: '東京都',
+    });
 
   return (
     <main>
       <PrefectureRadioButtons
         prefectureData={prefectureData}
-        selectedOption={selectedPrefectureOption}
+        selectedOption={selectedPrefecture.prefName}
         onChange={(e) => {
-          handleRadioButtonChange(e, setSelectedPrefectureOption);
+          handleRadioButtonChange(e, setSelectedPrefecture);
         }}
         prefectureDataLoading={prefectureDataLoading}
       />
 
       <PopulationGraphComponent
-        selectedPrefectureOption={selectedPrefectureOption}
+        selectedPrefectureOption={selectedPrefecture.prefName}
         apiKey={apiKey}
       />
+      {selectedPrefecture.prefCode}
     </main>
   );
 }

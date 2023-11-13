@@ -34,6 +34,7 @@ function PrefectureRadioButtons({
         <RadioButton
           key={prefecture.prefCode}
           option={prefecture.prefName}
+          dataSet={prefecture.prefCode}
           selectedOption={selectedOption}
           onChange={onChange}
         />

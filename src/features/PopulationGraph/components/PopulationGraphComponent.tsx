@@ -18,33 +18,29 @@ function PopulationGraphComponent({
   apiKey,
   selectedPrefectureOption,
 }: PopulationGraphComponentProps): JSX.Element {
+  // 人口統計のデータを取得
   const [populationData, populationDataLoading] = useGetData(
     'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=27',
     apiKey
   );
 
-  let totalPopulationData = [];
-
-  // populationDataが取られる前にこのコードが発動するから、findメソッドがバグるのを対処するため
-  // TODO: もっと良い方法を考える
-  if (populationData !== null && populationData.data !== null) {
-    const totalPopulation = populationData.data.find(
-      (d: { label: string }) => d.label === '総人口'
-    );
-    if (totalPopulation !== null) {
-      totalPopulationData = totalPopulation.data;
-    }
+  // データを取得できてない時はこれを表示
+  if (
+    populationDataLoading === true ||
+    populationData === null ||
+    populationData.data === undefined
+  ) {
+    return <p>データをロード中</p>;
   }
 
-  // TODO: ここも手直し必要
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (populationDataLoading) {
-    return (
-      <>
-        <p>データをロード中</p>
-      </>
-    );
-  }
+  // 取得した人口統計データから総人口のデータを取得
+  const totalPopulation = populationData.data.find(
+    (d: { label: string }) => d.label === '総人口'
+  );
+
+  // totalPopulationがnullの可能性を考慮
+  const totalPopulationData =
+    totalPopulation !== null ? totalPopulation.data : [];
 
   return (
     <div style={{ width: '500', height: '300' }}>

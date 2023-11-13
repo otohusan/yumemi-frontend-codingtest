@@ -28,7 +28,11 @@ function PopulationGraph(): JSX.Element {
         }}
         prefectureDataLoading={prefectureDataLoading}
       />
-      <PopulationGraphComponent />
+
+      <PopulationGraphComponent
+        selectedPrefectureOption={selectedPrefectureOption}
+        apiKey={apiKey}
+      />
     </main>
   );
 }

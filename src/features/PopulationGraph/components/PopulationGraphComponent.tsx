@@ -6,73 +6,63 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer,
 } from 'recharts';
+import useGetData from '../../../hooks/useGetData';
 
-function PopulationGraphComponent(): JSX.Element {
-  const demoData = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
+interface PopulationGraphComponentProps {
+  apiKey: string;
+  selectedPrefectureOption: string;
+}
+
+function PopulationGraphComponent({
+  apiKey,
+  selectedPrefectureOption,
+}: PopulationGraphComponentProps): JSX.Element {
+  const [populationData, populationDataLoading] = useGetData(
+    'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=27',
+    apiKey
+  );
+
+  let totalPopulationData = [];
+
+  // populationDataが取られる前にこのコードが発動するから、findメソッドがバグるのを対処するため
+  // TODO: もっと良い方法を考える
+  if (populationData !== null && populationData.data !== null) {
+    const totalPopulation = populationData.data.find(
+      (d: { label: string }) => d.label === '総人口'
+    );
+    if (totalPopulation !== null) {
+      totalPopulationData = totalPopulation.data;
+    }
+  }
+
+  // TODO: ここも手直し必要
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+  if (populationDataLoading) {
+    return (
+      <>
+        <p>データをロード中</p>
+      </>
+    );
+  }
 
   return (
-    <div>
-      <ResponsiveContainer width={500} height={300}>
-        <LineChart width={500} height={300} data={demoData}>
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='name' />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line
-            type='monotone'
-            dataKey='pv'
-            stroke='#8884d8'
-            activeDot={{ r: 8 }}
-          />
-          <Line type='monotone' dataKey='uv' stroke='#82ca9d' />
-        </LineChart>
-      </ResponsiveContainer>
+    <div style={{ width: '500', height: '300' }}>
+      <p>{selectedPrefectureOption}</p>
+      <LineChart width={500} height={300} data={totalPopulationData}>
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='year' />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line
+          type='monotone'
+          dataKey='pv'
+          stroke='#8884d8'
+          activeDot={{ r: 8 }}
+        />
+        <Line type='monotone' dataKey='value' stroke='#82ca9d' />
+      </LineChart>
     </div>
   );
 }

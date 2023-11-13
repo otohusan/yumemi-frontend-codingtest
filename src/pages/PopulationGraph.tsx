@@ -43,7 +43,6 @@ function PopulationGraph(): JSX.Element {
         selectedPrefectureCode={selectedPrefecture.prefCode}
         apiKey={apiKey}
       />
-      {selectedPrefecture.prefCode}
     </main>
   );
 }

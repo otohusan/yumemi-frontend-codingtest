@@ -6,8 +6,10 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from 'recharts';
 import useGetData from '../../../hooks/useGetData';
+import AgeCategoryRadioButtons from './AgeCategoryRadioButtons';
 
 interface PopulationGraphComponentProps {
   apiKey: string;
@@ -45,22 +47,40 @@ function PopulationGraphComponent({
     totalPopulation !== null ? totalPopulation.data : [];
 
   return (
-    <div style={{ width: '500', height: '300' }}>
+    <div style={{ width: '500px', height: '300px' }}>
       <p>{selectedPrefectureOption}</p>
-      <LineChart width={500} height={300} data={totalPopulationData}>
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='year' />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type='monotone'
-          dataKey='pv'
-          stroke='#8884d8'
-          activeDot={{ r: 8 }}
-        />
-        <Line type='monotone' dataKey='value' stroke='#82ca9d' />
-      </LineChart>
+      <ResponsiveContainer width='100%' height='100%'>
+        <LineChart
+          width={500}
+          height={300}
+          data={totalPopulationData}
+          margin={{
+            top: 5,
+            right: 10,
+            left: 30,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray='3 3' />
+          <XAxis dataKey='year' />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line
+            type='monotone'
+            dataKey='pv'
+            stroke='#8884d8'
+            activeDot={{ r: 8 }}
+          />
+          <Line
+            type='monotone'
+            dataKey='value'
+            name='総人口'
+            stroke='#82ca9d'
+          />
+        </LineChart>
+      </ResponsiveContainer>
+      <AgeCategoryRadioButtons />
     </div>
   );
 }

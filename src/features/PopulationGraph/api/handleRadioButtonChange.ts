@@ -8,7 +8,7 @@ function handleRadioButtonChange(
   setSelectedOption: (option: PrefectureOption) => void
 ): void {
   const prefName = event.target.value;
-  const prefCodeStr = event.target.dataset.prefcode;
+  const prefCodeStr = event.target.dataset.code;
 
   // stringとundefinedの場合を考慮する必要がある
   if (prefCodeStr !== undefined) {

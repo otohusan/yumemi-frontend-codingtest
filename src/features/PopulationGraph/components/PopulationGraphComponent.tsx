@@ -10,11 +10,18 @@ import {
 } from 'recharts';
 import useGetData from '../../../hooks/useGetData';
 import AgeCategoryRadioButtons from './AgeCategoryRadioButtons';
+import { useState } from 'react';
+import { handleAgeCategoryRadioButtonChange } from '../api';
 
 interface PopulationGraphComponentProps {
   apiKey: string;
   selectedPrefectureOption: string;
   selectedPrefectureCode: number;
+}
+
+interface AgeCategory {
+  ageCategoryCode: number;
+  ageCategoryName: string;
 }
 
 function PopulationGraphComponent({
@@ -28,6 +35,11 @@ function PopulationGraphComponent({
     apiKey
   );
 
+  const [selectedAgeCategory, setSelectedAgeCategory] = useState<AgeCategory>({
+    ageCategoryCode: 1,
+    ageCategoryName: '総人口',
+  });
+
   // データを取得できてない時はこれを表示
   if (
     populationDataLoading === true ||
@@ -39,7 +51,7 @@ function PopulationGraphComponent({
 
   // 取得した人口統計データから総人口のデータを取得
   const totalPopulation = populationData.data.find(
-    (d: { label: string }) => d.label === '総人口'
+    (d: { label: string }) => d.label === selectedAgeCategory.ageCategoryName
   );
 
   // totalPopulationがnullの可能性を考慮
@@ -68,19 +80,18 @@ function PopulationGraphComponent({
           <Legend />
           <Line
             type='monotone'
-            dataKey='pv'
-            stroke='#8884d8'
-            activeDot={{ r: 8 }}
-          />
-          <Line
-            type='monotone'
             dataKey='value'
-            name='総人口'
+            name={selectedAgeCategory.ageCategoryName}
             stroke='#82ca9d'
           />
         </LineChart>
       </ResponsiveContainer>
-      <AgeCategoryRadioButtons />
+      <AgeCategoryRadioButtons
+        selectedAgeCategory={selectedAgeCategory.ageCategoryName}
+        onChange={(e) => {
+          handleAgeCategoryRadioButtonChange(e, setSelectedAgeCategory);
+        }}
+      />
     </div>
   );
 }

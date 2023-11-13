@@ -21,7 +21,7 @@ function RadioButton({
           checked={selectedOption === option}
           onChange={onChange}
           name={option}
-          data-prefcode={dataSet}
+          data-code={dataSet}
         />
         {option}
       </label>

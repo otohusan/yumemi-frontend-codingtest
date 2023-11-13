@@ -12,15 +12,17 @@ import useGetData from '../../../hooks/useGetData';
 interface PopulationGraphComponentProps {
   apiKey: string;
   selectedPrefectureOption: string;
+  selectedPrefectureCode: number;
 }
 
 function PopulationGraphComponent({
   apiKey,
   selectedPrefectureOption,
+  selectedPrefectureCode,
 }: PopulationGraphComponentProps): JSX.Element {
   // 人口統計のデータを取得
   const [populationData, populationDataLoading] = useGetData(
-    'https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=27',
+    `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=${selectedPrefectureCode}`,
     apiKey
   );
 

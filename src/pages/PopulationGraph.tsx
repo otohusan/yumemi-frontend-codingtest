@@ -40,6 +40,7 @@ function PopulationGraph(): JSX.Element {
 
       <PopulationGraphComponent
         selectedPrefectureOption={selectedPrefecture.prefName}
+        selectedPrefectureCode={selectedPrefecture.prefCode}
         apiKey={apiKey}
       />
       {selectedPrefecture.prefCode}

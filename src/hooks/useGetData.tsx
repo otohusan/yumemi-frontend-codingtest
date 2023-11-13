@@ -22,7 +22,7 @@ function useGetData(url: string, apiKey: string): any {
         alert(`${error}が起きました`);
         setLoading(false);
       });
-  }, []);
+  }, [url]);
 
   return [data, loading];
 }

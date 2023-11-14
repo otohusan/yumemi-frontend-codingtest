@@ -21,6 +21,7 @@ function PopulationGraph(): JSX.Element {
 
   // ラジオボタンで選択されている都道府県を管理
   // 初期状態では、東京都（prefCode: 13）を設定
+  // グラフのために一旦おいているだけ、後で消す
   const [selectedPrefecture, setSelectedPrefecture] =
     useState<PrefectureOption>({
       prefCode: 13,

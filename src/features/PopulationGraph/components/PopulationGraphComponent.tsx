@@ -8,7 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { useGetData, useGetPopulationData } from '../../../hooks';
+import { useGetPopulationData } from '../../../hooks';
 import AgeCategoryRadioButtons from './AgeCategoryRadioButtons';
 import { useState } from 'react';
 import { handleAgeCategoryRadioButtonChange } from '../api';
@@ -29,13 +29,12 @@ function PopulationGraphComponent({
   selectedPrefectureOption,
   selectedPrefectureCode,
 }: PopulationGraphComponentProps): JSX.Element {
-  // 人口統計のデータを取得
-  const [populationData, populationDataLoading] = useGetData(
-    `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode=${selectedPrefectureCode}`,
+  // 人口のデータを取得する
+  const populationData = useGetPopulationData(
+    selectedPrefectureCode,
+    selectedPrefectureOption,
     apiKey
   );
-
-  const bbb = useGetPopulationData(2, '東京都', apiKey);
 
   // 選択されている年齢カテゴリを管理、初期値は総人口にしている
   const [selectedAgeCategory, setSelectedAgeCategory] = useState<AgeCategory>({
@@ -43,17 +42,8 @@ function PopulationGraphComponent({
     ageCategoryName: '総人口',
   });
 
-  // データを取得できてない時はこれを表示
-  if (
-    populationDataLoading === true ||
-    populationData === null ||
-    populationData.data === undefined
-  ) {
-    return <p>データをロード中</p>;
-  }
-
   // 取得した人口統計データから総人口のデータを取得
-  const totalPopulation = bbb.find(
+  const totalPopulation = populationData.find(
     (d: { label: string }) => d.label === selectedAgeCategory.ageCategoryName
   );
 
@@ -61,7 +51,7 @@ function PopulationGraphComponent({
 
   // totalPopulationがnullの可能性を考慮
   const totalPopulationData =
-    totalPopulation !== null ? totalPopulation.data : [];
+    totalPopulation != null ? totalPopulation.data : [];
 
   return (
     <div style={{ width: '500px', height: '300px' }}>
@@ -85,8 +75,8 @@ function PopulationGraphComponent({
           <Legend />
           <Line
             type='monotone'
-            dataKey='東京都'
-            name='東京都'
+            dataKey={selectedPrefectureOption}
+            name={selectedPrefectureOption}
             stroke='#82ca9d'
           />
         </LineChart>

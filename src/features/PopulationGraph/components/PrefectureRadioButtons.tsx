@@ -30,15 +30,6 @@ function PrefectureRadioButtons({
 
   return (
     <div>
-      {/* {prefectureData.map((prefecture: Prefecture) => (
-        <RadioButton
-          key={prefecture.prefCode}
-          option={prefecture.prefName}
-          dataSet={prefecture.prefCode}
-          selectedOption={selectedOption}
-          onChange={onChange}
-        />
-      ))} */}
       {prefectureData.map((prefecture: Prefecture) => (
         <CheckButton
           key={prefecture.prefCode}

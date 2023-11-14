@@ -26,9 +26,10 @@ function useGetPopulationData(
         .then((response) => {
           const transformedData = transformPopulationData(
             response.data.result.data,
+            populationData,
             prefName
           );
-          setPopulationData([...populationData, ...transformedData]);
+          setPopulationData(transformedData);
           setAlreadyHavePrefCode([...alreadyHavePrefCode, prefCode]);
         })
         .catch((error) => {

@@ -17,6 +17,7 @@ interface PopulationGraphComponentProps {
   apiKey: string;
   selectedPrefectureOption: string;
   selectedPrefectureCode: number;
+  prefectureCheckedValues: string[];
 }
 
 interface AgeCategory {
@@ -28,6 +29,7 @@ function PopulationGraphComponent({
   apiKey,
   selectedPrefectureOption,
   selectedPrefectureCode,
+  prefectureCheckedValues,
 }: PopulationGraphComponentProps): JSX.Element {
   // 人口のデータを取得する
   const populationData = useGetPopulationData(
@@ -73,12 +75,15 @@ function PopulationGraphComponent({
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line
-            type='monotone'
-            dataKey={selectedPrefectureOption}
-            name={selectedPrefectureOption}
-            stroke='#82ca9d'
-          />
+          {prefectureCheckedValues.map((prefecture: string) => (
+            <Line
+              type='monotone'
+              dataKey={prefecture}
+              name={prefecture}
+              stroke='#82ca9d'
+              key={prefecture}
+            />
+          ))}
         </LineChart>
       </ResponsiveContainer>
       <AgeCategoryRadioButtons

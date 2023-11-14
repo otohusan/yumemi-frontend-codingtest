@@ -8,7 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import useGetData from '../../../hooks/useGetData';
+import { useGetData, useGetPopulationData } from '../../../hooks';
 import AgeCategoryRadioButtons from './AgeCategoryRadioButtons';
 import { useState } from 'react';
 import { handleAgeCategoryRadioButtonChange } from '../api';
@@ -35,6 +35,8 @@ function PopulationGraphComponent({
     apiKey
   );
 
+  const bbb = useGetPopulationData(2, '東京都', apiKey);
+
   // 選択されている年齢カテゴリを管理、初期値は総人口にしている
   const [selectedAgeCategory, setSelectedAgeCategory] = useState<AgeCategory>({
     ageCategoryCode: 1,
@@ -51,9 +53,11 @@ function PopulationGraphComponent({
   }
 
   // 取得した人口統計データから総人口のデータを取得
-  const totalPopulation = populationData.data.find(
+  const totalPopulation = bbb.find(
     (d: { label: string }) => d.label === selectedAgeCategory.ageCategoryName
   );
+
+  console.log(totalPopulation);
 
   // totalPopulationがnullの可能性を考慮
   const totalPopulationData =
@@ -81,8 +85,8 @@ function PopulationGraphComponent({
           <Legend />
           <Line
             type='monotone'
-            dataKey='value'
-            name={selectedAgeCategory.ageCategoryName}
+            dataKey='東京都'
+            name='東京都'
             stroke='#82ca9d'
           />
         </LineChart>

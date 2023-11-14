@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PrefectureRadioButtons from '../features/PopulationGraph/components/PrefectureRadioButtons';
 import PopulationGraphComponent from '../features/PopulationGraph/components/PopulationGraphComponent';
-import useGetData from '../hooks/useGetData';
+import { useGetData } from '../hooks';
 import { handlePrefectureCheckButtonChange } from '../features/PopulationGraph/api';
 
 interface PrefectureOption {

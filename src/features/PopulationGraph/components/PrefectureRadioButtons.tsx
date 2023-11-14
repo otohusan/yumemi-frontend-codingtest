@@ -1,6 +1,4 @@
-import { RadioButton, CheckButton } from '../../../components';
-import { useState } from 'react';
-import { handlePrefectureCheckButtonChange } from '../api';
+import { CheckButton } from '../../../components';
 
 interface Prefecture {
   prefCode: number;
@@ -9,14 +7,14 @@ interface Prefecture {
 
 interface PrefectureRadioButtonsProps {
   prefectureData: Prefecture[];
-  selectedOption: string;
+  prefectureCheckedValues: string[];
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   prefectureDataLoading: boolean;
 }
 
 function PrefectureRadioButtons({
   prefectureData,
-  selectedOption,
+  prefectureCheckedValues,
   onChange,
   prefectureDataLoading,
 }: PrefectureRadioButtonsProps): JSX.Element {
@@ -30,13 +28,9 @@ function PrefectureRadioButtons({
     );
   }
 
-  const [prefectureCheckedValues, setPrefectureCheckedValues] = useState<
-    string[]
-  >([]);
-
   return (
     <div>
-      {prefectureData.map((prefecture: Prefecture) => (
+      {/* {prefectureData.map((prefecture: Prefecture) => (
         <RadioButton
           key={prefecture.prefCode}
           option={prefecture.prefName}
@@ -44,20 +38,14 @@ function PrefectureRadioButtons({
           selectedOption={selectedOption}
           onChange={onChange}
         />
-      ))}
+      ))} */}
       {prefectureData.map((prefecture: Prefecture) => (
         <CheckButton
           key={prefecture.prefCode}
           option={prefecture.prefName}
           checkedValues={prefectureCheckedValues}
           dataSet={prefecture.prefCode}
-          onChange={(event) => {
-            handlePrefectureCheckButtonChange({
-              event,
-              prefectureCheckedValues,
-              setPrefectureCheckedValues,
-            });
-          }}
+          onChange={onChange}
         />
       ))}
       {prefectureCheckedValues.join(', ')}

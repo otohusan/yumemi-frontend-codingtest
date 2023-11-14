@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PrefectureRadioButtons from '../features/PopulationGraph/components/PrefectureRadioButtons';
 import PopulationGraphComponent from '../features/PopulationGraph/components/PopulationGraphComponent';
 import useGetData from '../hooks/useGetData';
-import { handleRadioButtonChange } from '../features/PopulationGraph/api';
+import { handlePrefectureCheckButtonChange } from '../features/PopulationGraph/api';
 
 interface PrefectureOption {
   prefCode: number;
@@ -27,13 +27,21 @@ function PopulationGraph(): JSX.Element {
       prefName: '東京都',
     });
 
+  const [prefectureCheckedValues, setPrefectureCheckedValues] = useState<
+    string[]
+  >([]);
+
   return (
     <main>
       <PrefectureRadioButtons
         prefectureData={prefectureData}
-        selectedOption={selectedPrefecture.prefName}
-        onChange={(e) => {
-          handleRadioButtonChange(e, setSelectedPrefecture);
+        prefectureCheckedValues={prefectureCheckedValues}
+        onChange={(event) => {
+          handlePrefectureCheckButtonChange({
+            event,
+            prefectureCheckedValues,
+            setPrefectureCheckedValues,
+          });
         }}
         prefectureDataLoading={prefectureDataLoading}
       />

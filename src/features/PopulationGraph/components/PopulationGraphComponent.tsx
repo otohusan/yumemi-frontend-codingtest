@@ -35,6 +35,7 @@ function PopulationGraphComponent({
     apiKey
   );
 
+  // 選択されている年齢カテゴリを管理、初期値は総人口にしている
   const [selectedAgeCategory, setSelectedAgeCategory] = useState<AgeCategory>({
     ageCategoryCode: 1,
     ageCategoryName: '総人口',

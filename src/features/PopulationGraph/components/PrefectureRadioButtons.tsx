@@ -1,5 +1,6 @@
 import { RadioButton, CheckButton } from '../../../components';
 import { useState } from 'react';
+import { handlePrefectureCheckButtonChange } from '../api';
 
 interface Prefecture {
   prefCode: number;
@@ -29,7 +30,9 @@ function PrefectureRadioButtons({
     );
   }
 
-  const [prefectureCheckedValues, setPrefectureCheckedValues] = useState([]);
+  const [prefectureCheckedValues, setPrefectureCheckedValues] = useState<
+    string[]
+  >([]);
 
   return (
     <div>
@@ -48,8 +51,16 @@ function PrefectureRadioButtons({
           option={prefecture.prefName}
           checkedValues={prefectureCheckedValues}
           dataSet={prefecture.prefCode}
+          onChange={(event) => {
+            handlePrefectureCheckButtonChange({
+              event,
+              prefectureCheckedValues,
+              setPrefectureCheckedValues,
+            });
+          }}
         />
       ))}
+      {prefectureCheckedValues.join(', ')}
     </div>
   );
 }

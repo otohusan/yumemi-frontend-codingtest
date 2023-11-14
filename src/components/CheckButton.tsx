@@ -3,16 +3,15 @@ interface CheckButtonProps {
   checkedValues: string[];
   // 何かデータを追加したい時に使える
   dataSet: number;
-  //   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function CheckButton({
   option,
   checkedValues,
-  dataSet, //   onChange,
+  dataSet,
+  onChange,
 }: CheckButtonProps): JSX.Element {
-  function demoFunc(): void {}
-
   return (
     <div>
       <label key={option}>
@@ -20,7 +19,7 @@ function CheckButton({
           type='checkbox'
           value={option}
           // セレクトボックスがチェックされた、またはチェックが外れた際に関数handleChangeが実行される
-          onChange={demoFunc}
+          onChange={onChange}
           data-code={dataSet}
           checked={checkedValues.includes(option)}
         />

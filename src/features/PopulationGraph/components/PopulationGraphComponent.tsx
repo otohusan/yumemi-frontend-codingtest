@@ -10,6 +10,7 @@ import {
 } from 'recharts';
 import { useGetPopulationData } from '../../../hooks';
 import AgeCategoryRadioButtons from './AgeCategoryRadioButtons';
+import CustomLineDots from './CustomLineDots';
 import { useState } from 'react';
 import { handleAgeCategoryRadioButtonChange } from '../api';
 
@@ -24,6 +25,28 @@ interface AgeCategory {
   ageCategoryCode: number;
   ageCategoryName: string;
 }
+
+// LegendType 型を定義（Rechartsの定義に基づく）
+type LegendType = 'square' | 'circle' | 'cross' | 'triangle';
+
+// legendType 配列を LegendType 型として定義
+const legendTypes: LegendType[] = ['circle', 'square', 'triangle', 'cross'];
+
+// グラフの色
+const lineStroke = [
+  'cornflowerblue',
+  'lightseagreen',
+  'powderblue',
+  'sandybrown',
+  'silver',
+  'mediumpurple',
+  'gold',
+  'darkorchid',
+  'lightpink',
+  'seagreen',
+  'papayawhip',
+  'pink',
+];
 
 function PopulationGraphComponent({
   apiKey,
@@ -44,12 +67,10 @@ function PopulationGraphComponent({
     ageCategoryName: '総人口',
   });
 
-  // 取得した人口統計データから総人口のデータを取得
+  // 取得した人口統計データから人口カテゴリをもとに取得、初期値は総人口
   const totalPopulation = populationData.find(
     (d: { label: string }) => d.label === selectedAgeCategory.ageCategoryName
   );
-
-  console.log(totalPopulation);
 
   // totalPopulationがnullの可能性を考慮
   const totalPopulationData =
@@ -75,15 +96,26 @@ function PopulationGraphComponent({
           <YAxis />
           <Tooltip />
           <Legend />
-          {prefectureCheckedValues.map((prefecture: string) => (
-            <Line
-              type='monotone'
-              dataKey={prefecture}
-              name={prefecture}
-              stroke='#82ca9d'
-              key={prefecture}
-            />
-          ))}
+
+          {prefectureCheckedValues.map((prefecture: string, index: number) => {
+            const dotTypeIndex = Math.floor(index / lineStroke.length);
+            const CustomDotComponent = CustomLineDots[dotTypeIndex];
+            const strokeColor = lineStroke[index % lineStroke.length];
+
+            return (
+              <Line
+                type={'monotone'}
+                legendType={legendTypes[dotTypeIndex]}
+                dot={(props) => (
+                  <CustomDotComponent {...props} stroke={strokeColor} />
+                )}
+                dataKey={prefecture}
+                name={prefecture}
+                stroke={strokeColor}
+                key={prefecture}
+              />
+            );
+          })}
         </LineChart>
       </ResponsiveContainer>
       <AgeCategoryRadioButtons

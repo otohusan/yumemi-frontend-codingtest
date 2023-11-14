@@ -36,16 +36,16 @@ const legendTypes: LegendType[] = ['circle', 'square', 'triangle', 'cross'];
 const lineStroke = [
   'cornflowerblue',
   'lightseagreen',
-  'powderblue',
+  'darkslateblue',
   'sandybrown',
-  'silver',
+  'grey',
   'mediumpurple',
   'gold',
   'darkorchid',
   'lightpink',
   'seagreen',
-  'papayawhip',
-  'pink',
+  'indianred',
+  'yellowgreen',
 ];
 
 function PopulationGraphComponent({

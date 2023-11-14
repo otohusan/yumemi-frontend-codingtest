@@ -1,6 +1,6 @@
 interface CheckButtonProps {
   option: string;
-  checkedValues: string;
+  checkedValues: string[];
   // 何かデータを追加したい時に使える
   dataSet: number;
   //   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -9,9 +9,8 @@ interface CheckButtonProps {
 function CheckButton({
   option,
   checkedValues,
-  dataSet,
-} //   onChange,
-: CheckButtonProps): JSX.Element {
+  dataSet, //   onChange,
+}: CheckButtonProps): JSX.Element {
   function demoFunc(): void {}
 
   return (

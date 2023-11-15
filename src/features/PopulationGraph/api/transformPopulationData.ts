@@ -25,6 +25,7 @@ function transformPopulationData(
   existingData: TransformedData[] | null,
   prefectureName: string
 ): TransformedData[] {
+  // データが存在していなかった場合は新たに作る
   if (existingData == null || existingData.length === 0) {
     // 新しいデータを変換する
     return originalData.map((category) => ({
@@ -34,7 +35,9 @@ function transformPopulationData(
         [prefectureName]: entry.value,
       })),
     }));
-  } else {
+  }
+  // データが存在していた場合は統合する
+  else {
     // 新しい都道府県のデータを TransformedData[] 型に変換
     const newTransformedData = originalData.map((category) => ({
       label: category.label,

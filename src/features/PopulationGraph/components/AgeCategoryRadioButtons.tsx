@@ -6,6 +6,7 @@ interface AgeCategoryRadioButtonsProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+// APIのラベルに合わせている
 const AgeCategoryData = [
   { ageCategoryCode: 1, ageCategoryName: '総人口' },
   { ageCategoryCode: 2, ageCategoryName: '年少人口' },

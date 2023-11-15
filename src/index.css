@@ -7,12 +7,6 @@
   color: rgba(9, 9, 9, 0.87);
   background-color: #fdfdfd;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-
   --mini-margin: 8px;
   --standard-margin: 32px;
   --big-margin: 64px;
@@ -20,8 +14,6 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }

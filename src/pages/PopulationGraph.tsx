@@ -4,7 +4,7 @@ import PopulationGraphComponent from '../features/PopulationGraph/components/Pop
 import { useGetData } from '../hooks';
 import {
   handlePrefectureCheckButtonChange,
-  handleRadioButtonChange,
+  returnButtonValues,
 } from '../features/PopulationGraph/api';
 
 interface PrefectureOption {
@@ -22,9 +22,8 @@ function PopulationGraph(): JSX.Element {
     apiKey
   );
 
-  // ラジオボタンで選択されている都道府県を管理
-  // 初期状態では、東京都（prefCode: 13）を設定
   // 選択された都道府県を認識して、api通信を発動するために使う
+  // 初期状態では、東京都（prefCode: 13）を設定
   const [selectedPrefecture, setSelectedPrefecture] =
     useState<PrefectureOption>({
       prefCode: 13,
@@ -43,7 +42,7 @@ function PopulationGraph(): JSX.Element {
         prefectureCheckedValues={prefectureCheckedValues}
         onChange={(event) => {
           // APIの更新などのためにクリックされたボタンの認識
-          handleRadioButtonChange(event, setSelectedPrefecture);
+          returnButtonValues(event, setSelectedPrefecture);
           // チェックがついてるかによっての挙動が変わる関数の呼び出し
           handlePrefectureCheckButtonChange({
             event,

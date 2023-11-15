@@ -3,7 +3,7 @@ interface PrefectureOption {
   prefName: string;
 }
 
-function handleRadioButtonChange(
+function returnButtonValues(
   event: React.ChangeEvent<HTMLInputElement>,
   setSelectedOption: (option: PrefectureOption) => void
 ): void {
@@ -19,4 +19,4 @@ function handleRadioButtonChange(
   }
 }
 
-export default handleRadioButtonChange;
+export default returnButtonValues;

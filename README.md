@@ -1,27 +1,59 @@
-# React + TypeScript + Vite
+# ゆめみフロントエンドコーディングテスト
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+都道府県チェックボタンをクリックすることで、その都道府県の人口データを取得、グラフとして表示できる。
+また、年齢カテゴリによる人口増減の違いも確認できる。
 
-Currently, two official plugins are available:
+## 使用技術
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| Category | Technology Stack                    |
+| -------- | ----------------------------------- |
+| Frontend | React, TypeScript                   |
+| etc.     | ESLint, Prettier, Jest, Git, GitHub |
 
-## Expanding the ESLint configuration
+## 提出時に必要な連絡事項
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 課題作成に要した合計時間：
 
-- Configure the top-level `parserOptions` property like this:
+30時間程度
+<br>
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+### 総合的なプログラミング歴：
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+本格的にプログラミングを始めたのは1年ほど前からであり、開発経験としては主に2つあります。
+
+- 美術ギャラリーのホームページ
+
+- 和歌山の穴場スポット紹介サイト
+
+前者はRuby on railsと基本的なHTML、CSS、JavaScriptで作成しました。
+
+後者はAPIをDjangoで、フロントReact(JavaScript)で作成しました。
+
+また、現在はReact(TypeScript)とFirebaseを利用したアプリの作成に取り組もうと考えていたり、競技プログラミングにも興味があったりします。
+<br>
+
+### これまでのフロントエンド経験：
+
+上記で説明した内容と同じです。
+<br>
+
+### 参考にしたページやリポジトリなど：
+
+#### ディレクトリ構成
+
+[bulletproof-react](https://github.com/alan2207/bulletproof-react/tree/master)を参考にしました。
+全てを取り入れた訳ではありませんが、featuresなどを取り入れ拡張性にも優れたディレクトリ構成が出来たと思います。
+
+#### git コメント
+
+[僕が考える最強のコミットメッセージの書き方](https://qiita.com/konatsu_p/items/dfe199ebe3a7d2010b3e)を参考にしました。
+チームでの開発を意識するとコメントは大切だと感じたので、こちらの記事を参考に、できる限り形式的なコメントを残せるよう意識しました。
+
+#### テスト
+
+[【入門】フロントエンドのテスト手法まとめ](https://qiita.com/KNR109/items/7cf6b24bed318dab5715)などを中心に複数のサイトを参考にしました。
+テストコードを書いた経験がなかったので苦労をしましたが、時間があったことから、単体テストを中心にテストを行いました。
+
+### AIを利用した成果：
+
+グラフのカスタムドットを作成して欲しいとChatGPTに頼んだら、求めるカスタムドットを作成してくれました。

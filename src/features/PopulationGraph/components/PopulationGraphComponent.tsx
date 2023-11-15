@@ -98,6 +98,7 @@ function PopulationGraphComponent({
                 const dotTypeIndex = Math.floor(index / lineStroke.length);
                 const CustomDotComponent = CustomLineDots[dotTypeIndex];
                 const strokeColor = lineStroke[index % lineStroke.length];
+
                 return (
                   <Line
                     type={'monotone'}

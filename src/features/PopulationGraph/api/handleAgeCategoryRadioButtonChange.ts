@@ -3,7 +3,7 @@ interface AgeCategory {
   ageCategoryName: string;
 }
 
-function handleRadioButtonChange(
+function handleAgeCategoryRadioButtonChange(
   event: React.ChangeEvent<HTMLInputElement>,
   setSelectedOption: (option: AgeCategory) => void
 ): void {
@@ -19,4 +19,4 @@ function handleRadioButtonChange(
   }
 }
 
-export default handleRadioButtonChange;
+export default handleAgeCategoryRadioButtonChange;

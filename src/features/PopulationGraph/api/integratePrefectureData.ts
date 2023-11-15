@@ -18,7 +18,8 @@ function integratePrefectureData(
       (c) => c.label === category.label
     );
 
-    const newCategoryData = newCategoryEntry ? newCategoryEntry.data : [];
+    const newCategoryData =
+      newCategoryEntry != null ? newCategoryEntry.data : [];
 
     return {
       ...category,
@@ -26,7 +27,7 @@ function integratePrefectureData(
         const newEntryData = newCategoryData.find((e) => e.year === entry.year);
         return {
           ...entry,
-          ...(newEntryData && {
+          ...(newEntryData != null && {
             [prefectureName]: newEntryData[prefectureName],
           }),
         };

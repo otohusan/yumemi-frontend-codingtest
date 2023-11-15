@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import PrefectureRadioButtons from '../features/PopulationGraph/components/PrefectureRadioButtons';
+import PrefectureCheckButtons from '../features/PopulationGraph/components/PrefectureCheckButtons';
 import PopulationGraphComponent from '../features/PopulationGraph/components/PopulationGraphComponent';
 import { useGetData } from '../hooks';
 import {
@@ -24,20 +24,21 @@ function PopulationGraph(): JSX.Element {
 
   // ラジオボタンで選択されている都道府県を管理
   // 初期状態では、東京都（prefCode: 13）を設定
-  // グラフのために一旦おいているだけ、後で消す
+  // 選択された都道府県を認識して、api通信を発動するために使う
   const [selectedPrefecture, setSelectedPrefecture] =
     useState<PrefectureOption>({
-      prefCode: 2,
-      prefName: '青森県',
+      prefCode: 13,
+      prefName: '東京都',
     });
 
+  // チェックのついている都道府県を管理、動的にグラフを出現させるためなどに使う
   const [prefectureCheckedValues, setPrefectureCheckedValues] = useState<
     string[]
-  >(['青森県']);
+  >(['東京都']);
 
   return (
     <main>
-      <PrefectureRadioButtons
+      <PrefectureCheckButtons
         prefectureData={prefectureData}
         prefectureCheckedValues={prefectureCheckedValues}
         onChange={(event) => {

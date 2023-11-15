@@ -13,14 +13,14 @@ interface PrefectureRadioButtonsProps {
   prefectureDataLoading: boolean;
 }
 
-function PrefectureRadioButtons({
+function PrefectureCheckButtons({
   prefectureData,
   prefectureCheckedValues,
   onChange,
   prefectureDataLoading,
 }: PrefectureRadioButtonsProps): JSX.Element {
   // ロード中はこれを表示する
-  // 三項演算子を使ってする方法もありだけど、これの方が見やすい気がする
+  // 三項演算子を使ってする方法もありだけど、これの方がコードが見やすい気がする
   if (prefectureDataLoading) {
     return (
       <>
@@ -44,4 +44,4 @@ function PrefectureRadioButtons({
   );
 }
 
-export default PrefectureRadioButtons;
+export default PrefectureCheckButtons;

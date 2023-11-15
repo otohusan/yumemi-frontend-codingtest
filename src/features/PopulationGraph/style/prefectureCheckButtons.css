@@ -1,6 +1,6 @@
 .prefectureCheckButtonsContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   margin-bottom: var(--big-margin);
 }

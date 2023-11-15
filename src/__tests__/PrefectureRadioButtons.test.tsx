@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/';
-import PrefectureRadioButtons from '../features/PopulationGraph/components/PrefectureRadioButtons';
+import PrefectureRadioButtons from '../features/PopulationGraph/components/PrefectureCheckButtons';
 
 describe('都道府県ラジオボタン', () => {
   const mockOnChange = jest.fn();

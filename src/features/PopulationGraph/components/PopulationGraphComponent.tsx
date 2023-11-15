@@ -29,7 +29,6 @@ interface AgeCategory {
 
 // LegendType 型を定義（Rechartsの定義に基づく）
 type LegendType = 'square' | 'circle' | 'cross' | 'triangle';
-
 // legendType 配列を LegendType 型として定義
 const legendTypes: LegendType[] = ['circle', 'square', 'triangle', 'cross'];
 

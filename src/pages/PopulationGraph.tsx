@@ -6,6 +6,7 @@ import {
   handlePrefectureCheckButtonChange,
   returnButtonValues,
 } from '../features/PopulationGraph/api';
+import '../features/PopulationGraph/style/populationGraphTitle.css';
 
 interface PrefectureOption {
   prefCode: number;
@@ -37,6 +38,7 @@ function PopulationGraph(): JSX.Element {
 
   return (
     <main>
+      <h1 className='populationGraphTitle'>フロントエンドコーディングテスト</h1>
       <PrefectureCheckButtons
         prefectureData={prefectureData}
         prefectureCheckedValues={prefectureCheckedValues}

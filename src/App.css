@@ -1,6 +1,4 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  /* ページの上下だけデフォルトでスペースを空けてる */
-  padding: 2rem 0;
+  /* ページの下だけデフォルトでスペースを空けてる */
+  padding: 0 0 2rem 0;
 }

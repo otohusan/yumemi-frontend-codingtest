@@ -1,0 +1,9 @@
+.populationGraphComponentContainer {
+  /* グラフの大きさを指定する */
+  width: 85vw;
+  height: 400px;
+  min-height: 40vh;
+  margin-top: var(--standard-margin);
+  margin-bottom: var(--big-margin);
+  margin-left: var(--standard-margin);
+}

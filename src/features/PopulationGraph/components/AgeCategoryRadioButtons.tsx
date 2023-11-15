@@ -1,4 +1,5 @@
 import { RadioButton } from '../../../components';
+import '../style/ageCategoryRadioButtons.css';
 
 interface AgeCategoryRadioButtonsProps {
   selectedAgeCategory: string;
@@ -20,7 +21,7 @@ function AgeCategoryRadioButtons({
   onChange,
 }: AgeCategoryRadioButtonsProps): JSX.Element {
   return (
-    <div>
+    <div className='ageCategoryRadioButtons'>
       {AgeCategoryData.map((ageCategory) => (
         <RadioButton
           key={ageCategory.ageCategoryCode}

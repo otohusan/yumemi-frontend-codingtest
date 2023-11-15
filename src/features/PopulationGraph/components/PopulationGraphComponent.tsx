@@ -13,6 +13,7 @@ import AgeCategoryRadioButtons from './AgeCategoryRadioButtons';
 import CustomLineDots from './CustomLineDots';
 import { useState } from 'react';
 import { handleAgeCategoryRadioButtonChange } from '../api';
+import '../style/populationGraphComponent.css';
 
 interface PopulationGraphComponentProps {
   apiKey: string;
@@ -77,54 +78,54 @@ function PopulationGraphComponent({
     totalPopulation != null ? totalPopulation.data : [];
 
   return (
-    <div style={{ width: '500px', height: '300px' }}>
-      <p>{selectedPrefectureOption}</p>
-      <ResponsiveContainer width='100%' height='100%'>
-        <LineChart
-          width={500}
-          height={300}
-          data={totalPopulationData}
-          margin={{
-            top: 5,
-            right: 10,
-            left: 30,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='year' />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-
-          {prefectureCheckedValues.map((prefecture: string, index: number) => {
-            const dotTypeIndex = Math.floor(index / lineStroke.length);
-            const CustomDotComponent = CustomLineDots[dotTypeIndex];
-            const strokeColor = lineStroke[index % lineStroke.length];
-
-            return (
-              <Line
-                type={'monotone'}
-                legendType={legendTypes[dotTypeIndex]}
-                dot={(props) => (
-                  <CustomDotComponent {...props} stroke={strokeColor} />
-                )}
-                dataKey={prefecture}
-                name={prefecture}
-                stroke={strokeColor}
-                key={prefecture}
-              />
-            );
-          })}
-        </LineChart>
-      </ResponsiveContainer>
+    <section>
+      <div className='populationGraphComponentContainer'>
+        <ResponsiveContainer>
+          <LineChart
+            data={totalPopulationData}
+            // このマージンを設定しないと、数字が隠れる
+            margin={{
+              right: 10,
+              left: 30,
+            }}
+          >
+            <CartesianGrid strokeDasharray='3 3' />
+            <XAxis dataKey='year' />
+            <YAxis />
+            <Tooltip />
+            {prefectureCheckedValues.map(
+              (prefecture: string, index: number) => {
+                // グラフのラインの色と形を動的に割り当てる
+                const dotTypeIndex = Math.floor(index / lineStroke.length);
+                const CustomDotComponent = CustomLineDots[dotTypeIndex];
+                const strokeColor = lineStroke[index % lineStroke.length];
+                return (
+                  <Line
+                    type={'monotone'}
+                    legendType={legendTypes[dotTypeIndex]}
+                    dot={(props) => (
+                      <CustomDotComponent {...props} stroke={strokeColor} />
+                    )}
+                    dataKey={prefecture}
+                    name={prefecture}
+                    stroke={strokeColor}
+                    key={prefecture}
+                  />
+                );
+              }
+            )}
+            <Legend />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+      {/* 年齢カテゴリを呼び出している */}
       <AgeCategoryRadioButtons
         selectedAgeCategory={selectedAgeCategory.ageCategoryName}
         onChange={(e) => {
           handleAgeCategoryRadioButtonChange(e, setSelectedAgeCategory);
         }}
       />
-    </div>
+    </section>
   );
 }
 

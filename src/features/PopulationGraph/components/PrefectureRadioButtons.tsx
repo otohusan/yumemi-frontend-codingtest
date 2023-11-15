@@ -1,4 +1,5 @@
 import { CheckButton } from '../../../components';
+import '../style/prefectureCheckButtons.css';
 
 interface Prefecture {
   prefCode: number;
@@ -29,7 +30,7 @@ function PrefectureRadioButtons({
   }
 
   return (
-    <div>
+    <section className='prefectureCheckButtonsContainer'>
       {prefectureData.map((prefecture: Prefecture) => (
         <CheckButton
           key={prefecture.prefCode}
@@ -39,7 +40,7 @@ function PrefectureRadioButtons({
           onChange={onChange}
         />
       ))}
-    </div>
+    </section>
   );
 }
 

@@ -1,3 +1,5 @@
+import '../style/checkButton.css';
+
 interface CheckButtonProps {
   option: string;
   checkedValues: string[];
@@ -13,7 +15,7 @@ function CheckButton({
   onChange,
 }: CheckButtonProps): JSX.Element {
   return (
-    <div>
+    <div className='checkButton'>
       <label key={option}>
         <input
           type='checkbox'
